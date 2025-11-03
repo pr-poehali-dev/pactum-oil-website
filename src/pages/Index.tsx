@@ -2,17 +2,35 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const { toast } = useToast();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: 'Сообщение отправлено!',
+      description: 'Мы свяжемся с вами в ближайшее время.',
+    });
+    setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   const navItems = [
@@ -246,28 +264,97 @@ const Index = () => {
 
 
       <section id="contacts" className="py-24 bg-[#0A0A0A] px-6">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-6xl">
           <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center">Контакты</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-3xl font-bold text-white mb-8">Свяжитесь с нами</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
+                  <Icon name="MapPin" size={32} className="text-[#FF8C00] mb-3" />
+                  <h4 className="text-lg font-bold text-white mb-2">Адрес</h4>
+                  <p className="text-gray-300 text-sm">г. Москва, ул. Нефтяная, д. 100</p>
+                </Card>
+                <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
+                  <Icon name="Phone" size={32} className="text-[#FF8C00] mb-3" />
+                  <h4 className="text-lg font-bold text-white mb-2">Телефон</h4>
+                  <p className="text-gray-300 text-sm">+7 (495) 123-45-67</p>
+                </Card>
+                <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
+                  <Icon name="Mail" size={32} className="text-[#FF8C00] mb-3" />
+                  <h4 className="text-lg font-bold text-white mb-2">Email</h4>
+                  <p className="text-gray-300 text-sm">info@pactumoil.com</p>
+                </Card>
+                <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
+                  <Icon name="Clock" size={32} className="text-[#FF8C00] mb-3" />
+                  <h4 className="text-lg font-bold text-white mb-2">Режим работы</h4>
+                  <p className="text-gray-300 text-sm">Пн-Пт: 9:00 - 18:00</p>
+                </Card>
+              </div>
+            </div>
+
             <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8">
-              <Icon name="MapPin" size={36} className="text-[#FF8C00] mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Адрес</h3>
-              <p className="text-gray-300">г. Москва, ул. Нефтяная, д. 100</p>
-            </Card>
-            <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8">
-              <Icon name="Phone" size={36} className="text-[#FF8C00] mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Телефон</h3>
-              <p className="text-gray-300">+7 (495) 123-45-67</p>
-            </Card>
-            <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8">
-              <Icon name="Mail" size={36} className="text-[#FF8C00] mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-              <p className="text-gray-300">info@pactumoil.com</p>
-            </Card>
-            <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8">
-              <Icon name="Clock" size={36} className="text-[#FF8C00] mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Режим работы</h3>
-              <p className="text-gray-300">Пн-Пт: 9:00 - 18:00</p>
+              <h3 className="text-3xl font-bold text-white mb-6">Форма обратной связи</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-white font-semibold mb-2">Имя *</label>
+                  <Input
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00]"
+                    placeholder="Введите ваше имя"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-white font-semibold mb-2">Email *</label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00]"
+                    placeholder="example@mail.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-white font-semibold mb-2">Телефон</label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00]"
+                    placeholder="+7 (___) ___-__-__"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-white font-semibold mb-2">Сообщение *</label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={5}
+                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00] resize-none"
+                    placeholder="Расскажите, чем мы можем вам помочь..."
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] py-6 text-lg rounded-full font-semibold hover-scale"
+                >
+                  <Icon name="Send" size={20} className="mr-2" />
+                  Отправить сообщение
+                </Button>
+              </form>
             </Card>
           </div>
         </div>
