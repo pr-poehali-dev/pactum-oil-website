@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
+    setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -16,9 +19,8 @@ const Index = () => {
     { id: 'about', label: 'О КОМПАНИИ' },
     { id: 'activity', label: 'ДЕЯТЕЛЬНОСТЬ' },
     { id: 'products', label: 'ПРОДУКТЫ' },
-    { id: 'leadership', label: 'РУКОВОДСТВО' },
-    { id: 'contacts', label: 'КОНТАКТЫ' },
     { id: 'career', label: 'КАРЬЕРА' },
+    { id: 'contacts', label: 'КОНТАКТЫ' },
   ];
 
   const activities = [
@@ -116,6 +118,27 @@ const Index = () => {
                 </button>
               ))}
             </div>
+
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <Button variant="ghost" size="icon" className="text-white hover:text-[#FF8C00]">
+                  <Icon name="Menu" size={28} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-[#0A0A0A] border-l-2 border-[#FF8C00] w-[280px]">
+                <div className="flex flex-col gap-6 mt-8">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className="text-white hover:text-[#FF8C00] transition-colors duration-300 font-semibold text-lg tracking-wide text-left py-3 border-b border-[#FF8C00]/20"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>
@@ -220,23 +243,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="leadership" className="py-24 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] px-6">
-        <div className="container mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center">Руководство</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {leadership.map((person, index) => (
-              <Card key={index} className="bg-[#0A0A0A] border-2 border-[#FF8C00] p-8 text-center hover-scale transition-all">
-                <div className="w-24 h-24 bg-[#FF8C00] rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Icon name="User" size={40} className="text-[#0A0A0A]" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{person.name}</h3>
-                <p className="text-[#FF8C00] font-semibold mb-3">{person.position}</p>
-                <p className="text-gray-300">{person.description}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       <section id="contacts" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto max-w-4xl">
@@ -266,7 +273,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="career" className="py-24 bg-gradient-to-b from-[#0A0A0A] to-[#FF8C00] px-6">
+      <section id="career" className="py-24 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] px-6">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-8">Карьера</h2>
           <p className="text-white text-xl mb-12">
