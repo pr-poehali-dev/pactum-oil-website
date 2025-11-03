@@ -72,4 +72,17 @@
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-105;
   }
+
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-animate.animate-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

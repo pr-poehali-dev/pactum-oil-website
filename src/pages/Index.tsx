@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -32,6 +32,27 @@ const Index = () => {
     });
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const navItems = [
     { id: 'about', label: 'О КОМПАНИИ' },
@@ -193,15 +214,15 @@ const Index = () => {
 
       <section id="about" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-12 text-center">О компании</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-12 text-center scroll-animate opacity-0">О компании</h2>
           <div className="max-w-4xl mx-auto text-white text-lg leading-relaxed space-y-6">
-            <p>
+            <p className="scroll-animate opacity-0">
               <strong className="text-[#FF8C00]">Pactum Oil Company</strong> — ведущая нефтяная компания, специализирующаяся на полном цикле работы с углеводородами: от разведки и добычи до глубокой переработки и экспорта нефтепродуктов.
             </p>
-            <p>
+            <p className="scroll-animate opacity-0">
               Мы применяем передовые технологии и инновационные решения для обеспечения надежности, безопасности и экологичности всех производственных процессов.
             </p>
-            <p>
+            <p className="scroll-animate opacity-0">
               Наша миссия — обеспечивать стабильные поставки качественной энергии, способствуя экономическому развитию и улучшению качества жизни людей по всему миру.
             </p>
           </div>
@@ -210,12 +231,13 @@ const Index = () => {
 
       <section id="activity" className="py-24 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] px-6">
         <div className="container mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center">Деятельность</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center scroll-animate opacity-0">Деятельность</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {activities.map((activity, index) => (
               <Card
                 key={index}
-                className="bg-[#0A0A0A] border-2 border-[#FF8C00] p-8 hover:bg-[#FF8C00] hover:border-[#0A0A0A] transition-all duration-300 hover-scale group"
+                className="bg-[#0A0A0A] border-2 border-[#FF8C00] p-8 hover:bg-[#FF8C00] hover:border-[#0A0A0A] transition-all duration-300 hover-scale group scroll-animate opacity-0"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <Icon
                   name={activity.icon}
@@ -236,13 +258,13 @@ const Index = () => {
 
       <section id="products" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-6 text-center">Продукты</h2>
-          <p className="text-center text-white text-xl mb-16 max-w-3xl mx-auto">
+          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-6 text-center scroll-animate opacity-0">Продукты</h2>
+          <p className="text-center text-white text-xl mb-16 max-w-3xl mx-auto scroll-animate opacity-0">
             Следите за последними новостями и достижениями компании
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {newsCards.map((card, index) => (
-              <Card key={index} className="bg-white overflow-hidden border-0 hover-scale transition-all">
+              <Card key={index} className="bg-white overflow-hidden border-0 hover-scale transition-all scroll-animate opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
                 <img
                   src={card.image}
                   alt={card.title}
@@ -265,10 +287,10 @@ const Index = () => {
 
       <section id="contacts" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center">Контакты</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-16 text-center scroll-animate opacity-0">Контакты</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
+            <div className="scroll-animate opacity-0">
               <h3 className="text-3xl font-bold text-white mb-8">Свяжитесь с нами</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
@@ -294,7 +316,7 @@ const Index = () => {
               </div>
             </div>
 
-            <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8">
+            <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8 scroll-animate opacity-0">
               <h3 className="text-3xl font-bold text-white mb-6">Форма обратной связи</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -362,11 +384,11 @@ const Index = () => {
 
       <section id="career" className="py-24 bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A] px-6">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-8">Карьера</h2>
-          <p className="text-white text-xl mb-12">
+          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-8 scroll-animate opacity-0">Карьера</h2>
+          <p className="text-white text-xl mb-12 scroll-animate opacity-0">
             Присоединяйтесь к команде профессионалов Pactum Oil Company и развивайте свою карьеру в динамично развивающейся отрасли.
           </p>
-          <Card className="bg-white p-10">
+          <Card className="bg-white p-10 scroll-animate opacity-0">
             <h3 className="text-3xl font-bold text-[#0A0A0A] mb-6">Почему Pactum Oil?</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-8">
               <div className="flex items-start gap-3">
