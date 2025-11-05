@@ -212,6 +212,25 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-16 bg-[#0A0A0A] px-6">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#FF8C00] mb-8 text-center scroll-animate opacity-0">
+            Котировки нефти Brent
+          </h2>
+          <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] overflow-hidden scroll-animate opacity-0">
+            <iframe
+              src="https://www.profinance.ru/chart/brent/"
+              width="100%"
+              height="600"
+              frameBorder="0"
+              scrolling="no"
+              title="Котировки нефти Brent"
+              className="w-full"
+            />
+          </Card>
+        </div>
+      </section>
+
       <section id="about" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto">
           <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-12 text-center scroll-animate opacity-0">О компании</h2>
