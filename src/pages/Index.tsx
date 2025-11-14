@@ -143,7 +143,7 @@ const Index = () => {
                 className="h-12 w-auto"
               />
               <div>
-                <h1 className="text-white text-xl font-bold tracking-wider">PACTUM</h1>
+                <h1 className="text-[#FF8C00] text-xl font-bold tracking-wider">PACTUM</h1>
                 <p className="text-[#FF8C00] text-xs font-semibold">OIL COMPANY</p>
               </div>
             </div>
