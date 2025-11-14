@@ -12,6 +12,7 @@ const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [callbackPhone, setCallbackPhone] = useState('');
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -24,6 +25,40 @@ const Index = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleCallbackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/a4622aee-0df7-4b41-8290-75c623ca1042', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phone: callbackPhone }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Запрос отправлен!',
+          description: 'Мы перезвоним вам в ближайшее время.',
+        });
+        setCallbackPhone('');
+      } else {
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось отправить запрос. Попробуйте позже.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось отправить запрос. Проверьте подключение.',
+        variant: 'destructive',
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -227,11 +262,11 @@ const Index = () => {
               onClick={() => navigate('/request')}
               className="bg-[#0A0A0A] text-white hover:bg-[#1A1A1A] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
             >
-              Запросить
+              Отправить запрос продукции
             </Button>
             <Button 
               onClick={() => navigate('/offers')}
-              className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
+              className="bg-transparent border-2 border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
             >
               Актуальные предложения
             </Button>
@@ -242,7 +277,7 @@ const Index = () => {
       <section className="py-20 bg-[#0A0A0A] rounded-t-[80px] px-6">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl md:text-5xl font-bold text-[#FF8C00] mb-8 text-center scroll-animate opacity-0">
-            Котировки онлайн
+            Котировки онлайн от ПроФинанс.ru
           </h2>
           <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] overflow-hidden scroll-animate opacity-0">
             <iframe
@@ -356,17 +391,22 @@ const Index = () => {
                 <p className="text-gray-300 text-center mb-6">
                   Оставьте ваш номер телефона, и наш менеджер свяжется с вами в ближайшее время
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Input
-                    type="tel"
-                    placeholder="+7 (___) ___-__-__"
-                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00] flex-1"
-                  />
-                  <Button className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-8 py-6 rounded-full font-semibold whitespace-nowrap">
-                    <Icon name="PhoneCall" size={18} className="mr-2" />
-                    Заказать звонок
-                  </Button>
-                </div>
+                <form onSubmit={handleCallbackSubmit}>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      type="tel"
+                      value={callbackPhone}
+                      onChange={(e) => setCallbackPhone(e.target.value)}
+                      required
+                      placeholder="+7 (___) ___-__-__"
+                      className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00] flex-1"
+                    />
+                    <Button type="submit" className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-8 py-6 rounded-full font-semibold whitespace-nowrap">
+                      <Icon name="PhoneCall" size={18} className="mr-2" />
+                      Заказать звонок
+                    </Button>
+                  </div>
+                </form>
               </Card>
             </div>
 

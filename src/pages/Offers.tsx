@@ -174,15 +174,15 @@ const Offers = () => {
           {filteredOffers.map((offer) => (
             <Card 
               key={offer.id}
-              className="bg-white border-2 border-gray-200 hover:border-[#FF8C00] transition-all duration-300 overflow-hidden hover:shadow-xl"
+              className="bg-white border-2 border-gray-200 hover:border-[#FF8C00] transition-all duration-300 overflow-hidden hover:shadow-xl flex flex-col"
             >
               <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFA500] p-6">
                 <h3 className="text-2xl font-bold text-white mb-2">{offer.title}</h3>
                 <p className="text-white/90">{offer.description}</p>
               </div>
               
-              <div className="p-6">
-                <div className="mb-6">
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="mb-6 flex-grow">
                   <h4 className="font-semibold text-[#0A0A0A] mb-3 flex items-center gap-2">
                     <Icon name="FileText" size={18} className="text-[#FF8C00]" />
                     Характеристики:
@@ -214,22 +214,13 @@ const Offers = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                  <Button
-                    onClick={() => navigate('/request')}
-                    className="w-full bg-[#FF8C00] text-white hover:bg-[#FFA500] py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
-                  >
-                    <Icon name="Send" size={18} className="mr-2" />
-                    Запросить предложение
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
-                  >
-                    <a href="/request">Перейти к запросу</a>
-                  </Button>
-                </div>
+                <Button
+                  onClick={() => navigate('/request')}
+                  className="w-full bg-[#FF8C00] text-white hover:bg-[#FFA500] py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
+                >
+                  <Icon name="Send" size={18} className="mr-2" />
+                  Запросить предложение
+                </Button>
               </div>
             </Card>
           ))}
@@ -254,8 +245,7 @@ const Offers = () => {
               </Button>
               <Button
                 asChild
-                variant="outline"
-                className="border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white px-8 py-6 text-lg rounded-full font-semibold"
+                className="bg-white border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white px-8 py-6 text-lg rounded-full font-semibold"
               >
                 <a href="/#contacts">
                   <Icon name="Phone" size={20} className="mr-2" />
