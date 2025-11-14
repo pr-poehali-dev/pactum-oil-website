@@ -419,23 +419,19 @@ const Index = () => {
       <footer className="bg-[#0A0A0A] py-12 px-6 border-t-2 border-[#FF8C00]">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-[#FF8C00] rounded-full flex items-center justify-center">
-              <Icon name="Flame" size={28} className="text-[#0A0A0A]" />
-            </div>
+            <img 
+              src="https://cdn.poehali.dev/files/192ce21d-f20e-4289-bb57-c70974d9603a.png" 
+              alt="Pactum Oil Company Logo" 
+              className="h-12 w-auto"
+            />
             <div>
-              <h1 className="text-white text-xl font-bold tracking-wider">PACTUM</h1>
+              <h1 className="text-[#FF8C00] text-xl font-bold tracking-wider">PACTUM</h1>
               <p className="text-[#FF8C00] text-xs font-semibold">OIL COMPANY</p>
             </div>
           </div>
           <p className="text-gray-400 mb-4">
-            © 2024 Pactum Oil Company. Все права защищены.
+            © 2025 Pactum Oil Company. Все права защищены.
           </p>
-          <div className="flex justify-center gap-6">
-            <Icon name="Facebook" size={24} className="text-[#FF8C00] hover:text-[#FFA500] cursor-pointer transition-colors" />
-            <Icon name="Twitter" size={24} className="text-[#FF8C00] hover:text-[#FFA500] cursor-pointer transition-colors" />
-            <Icon name="Linkedin" size={24} className="text-[#FF8C00] hover:text-[#FFA500] cursor-pointer transition-colors" />
-            <Icon name="Instagram" size={24} className="text-[#FF8C00] hover:text-[#FFA500] cursor-pointer transition-colors" />
-          </div>
         </div>
       </footer>
     </div>
