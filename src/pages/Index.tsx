@@ -138,7 +138,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('home')}>
               <img 
-                src="https://cdn.poehali.dev/files/031b3d50-43ca-473b-9369-afec09d6e5ca.png" 
+                src="https://cdn.poehali.dev/files/192ce21d-f20e-4289-bb57-c70974d9603a.png" 
                 alt="Pactum Oil Company Logo" 
                 className="h-12 w-auto"
               />
