@@ -26,13 +26,38 @@ const Index = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: 'Сообщение отправлено!',
-      description: 'Мы свяжемся с вами в ближайшее время.',
-    });
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/70840b8f-5e4e-4104-b49b-6b82df07e20d', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Сообщение отправлено!',
+          description: 'Мы свяжемся с вами в ближайшее время.',
+        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось отправить сообщение. Попробуйте позже.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось отправить сообщение. Проверьте подключение к интернету.',
+        variant: 'destructive',
+      });
+    }
   };
 
   useEffect(() => {

@@ -1,0 +1,42 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": "",
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "Test POST with valid data",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Петров",
+        "email": "ivan@example.com",
+        "phone": "+7 900 123-45-67",
+        "message": "Интересует поставка нефтепродуктов"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": "boolean"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test POST with missing required field",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Петров",
+        "email": "ivan@example.com"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
