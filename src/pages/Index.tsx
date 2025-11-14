@@ -294,17 +294,17 @@ const Index = () => {
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
                   <Icon name="MapPin" size={32} className="text-[#FF8C00] mb-3" />
                   <h4 className="text-lg font-bold text-white mb-2">Адрес</h4>
-                  <p className="text-gray-300 text-sm">г. Москва, ул. Нефтяная, д. 100</p>
+                  <p className="text-gray-300 text-sm">г. Назрань, проспект И.Базоркина, д.10А</p>
                 </Card>
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
                   <Icon name="Phone" size={32} className="text-[#FF8C00] mb-3" />
                   <h4 className="text-lg font-bold text-white mb-2">Телефон</h4>
-                  <p className="text-gray-300 text-sm">+7 (495) 123-45-67</p>
+                  <p className="text-gray-300 text-sm">8 800 550 35 32</p>
                 </Card>
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
                   <Icon name="Mail" size={32} className="text-[#FF8C00] mb-3" />
                   <h4 className="text-lg font-bold text-white mb-2">Email</h4>
-                  <p className="text-gray-300 text-sm">info@pactumoil.com</p>
+                  <p className="text-gray-300 text-sm">info@pactumus.ru</p>
                 </Card>
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
                   <Icon name="Clock" size={32} className="text-[#FF8C00] mb-3" />
@@ -367,6 +367,9 @@ const Index = () => {
                     placeholder="Расскажите, чем мы можем вам помочь..."
                   />
                 </div>
+                <p className="text-gray-400 text-xs text-center">
+                  Нажимая на кнопку ниже вы даете свое согласие на обработку персональных данных
+                </p>
                 <Button
                   type="submit"
                   className="w-full bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] py-6 text-lg rounded-full font-semibold hover-scale"
