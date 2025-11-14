@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
@@ -12,6 +13,7 @@ const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -196,10 +198,10 @@ const Index = () => {
             Широкий спектр нефтяной продукции
           </p>
           <Button
-            onClick={() => scrollToSection('about')}
+            onClick={() => navigate('/request')}
             className="bg-[#0A0A0A] text-white hover:bg-[#1A1A1A] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
           >
-            Посмотреть
+            Запросить
           </Button>
         </div>
       </section>
