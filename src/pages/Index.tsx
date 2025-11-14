@@ -271,25 +271,12 @@ const Index = () => {
         <div className="container mx-auto">
           <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-6 text-center scroll-animate opacity-0">Продукты</h2>
           <p className="text-center text-white text-xl mb-16 max-w-3xl mx-auto scroll-animate opacity-0">
-            Следите за последними новостями и достижениями компании
+            Широкий ассортимент нефтепродуктов высокого качества
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {newsCards.map((card, index) => (
-              <Card key={index} className="bg-white overflow-hidden border-0 hover-scale transition-all scroll-animate opacity-0" style={{ animationDelay: `${index * 150}ms` }}>
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-[#0A0A0A] mb-3">{card.title}</h3>
-                  <p className="text-gray-700 mb-6">{card.description}</p>
-                  <Button className="w-full bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] rounded-full font-semibold py-6">
-                    Подробнее
-                  </Button>
-                </div>
-              </Card>
-            ))}
+          <div className="flex justify-center">
+            <Button className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] hover:scale-105 transition-all duration-300 rounded-full font-bold text-lg px-12 py-8 scroll-animate opacity-0">
+              Ознакомиться с актуальными предложениями
+            </Button>
           </div>
         </div>
       </section>
