@@ -204,20 +204,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-[#0A0A0A] rounded-t-[80px]">
-        <div className="container mx-auto px-6">
-          <img
-            src="https://cdn.poehali.dev/files/32e21ab7-114b-49f1-ad57-9808c2db5430.png"
-            alt="Oil visualization"
-            className="w-full max-w-5xl mx-auto rounded-3xl animate-slide-up"
-          />
-        </div>
-      </section>
-
-      <section className="py-16 bg-[#0A0A0A] px-6">
+      <section className="py-20 bg-[#0A0A0A] rounded-t-[80px] px-6">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl md:text-5xl font-bold text-[#FF8C00] mb-8 text-center scroll-animate opacity-0">
-            Котировки нефти Brent
+            Котировки онлайн
           </h2>
           <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] overflow-hidden scroll-animate opacity-0">
             <iframe
