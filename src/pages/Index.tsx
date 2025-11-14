@@ -226,16 +226,31 @@ const Index = () => {
       <section id="about" className="py-24 bg-[#0A0A0A] px-6">
         <div className="container mx-auto">
           <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-12 text-center scroll-animate opacity-0">О компании</h2>
-          <div className="max-w-4xl mx-auto text-white text-lg leading-relaxed space-y-6">
-            <p className="scroll-animate opacity-0">
-              <strong className="text-[#FF8C00]">Pactum Oil Company</strong> — современная нефтяная компания, ставшая результатом слияния нескольких компаний, специализировавшихся на добыче, переработке, консалтинге, транспортировке и реализации нефти и нефтепродуктов, что позволило объединить усилия, ресурсы и опыт на полном цикле работы с углеводородами: от разведки и добычи до глубокой переработки и экспорта нефтепродуктов.
-            </p>
-            <p className="scroll-animate opacity-0">
-              Мы применяем передовые технологии и инновационные решения для обеспечения надежности, безопасности и экологичности всех производственных процессов.
-            </p>
-            <p className="scroll-animate opacity-0">
-              Наша миссия — обеспечивать стабильные поставки качественной энергии, способствуя экономическому развитию и улучшению качества жизни людей во всех уголках планеты.
-            </p>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+              <div className="scroll-animate opacity-0">
+                <img 
+                  src="https://cdn.poehali.dev/files/6e3f99d7-b5f1-4e5e-b3e1-7cd763189be7.jpg" 
+                  alt="Нальгиев Магомет Асхабович" 
+                  className="w-full rounded-lg border-2 border-[#FF8C00] mb-4"
+                />
+                <div className="text-center">
+                  <p className="text-white font-bold text-lg">Генеральный директор</p>
+                  <p className="text-[#FF8C00] font-semibold">Нальгиев Магомет Асхабович</p>
+                </div>
+              </div>
+              <div className="lg:col-span-2 text-white text-lg leading-relaxed space-y-6">
+                <p className="scroll-animate opacity-0">
+                  <strong className="text-[#FF8C00]">Pactum Oil Company</strong> — современная нефтяная компания, ставшая результатом слияния нескольких компаний, специализировавшихся на добыче, переработке, консалтинге, транспортировке и реализации нефти и нефтепродуктов, что позволило объединить усилия, ресурсы и опыт для создания полного цикла работы с углеводородами: от разведки и добычи до глубокой переработки и экспорта нефтепродуктов.
+                </p>
+                <p className="scroll-animate opacity-0">
+                  Мы применяем передовые технологии и инновационные решения для обеспечения надежности, безопасности и экологичности всех производственных процессов.
+                </p>
+                <p className="scroll-animate opacity-0">
+                  Наша миссия — обеспечивать стабильные поставки качественной энергии, способствуя экономическому развитию и улучшению качества жизни людей во всех уголках планеты.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
