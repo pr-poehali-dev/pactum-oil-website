@@ -424,8 +424,13 @@ const Index = () => {
                 <p className="text-gray-700">Социальный пакет</p>
               </div>
             </div>
-            <Button className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-12 py-6 text-lg rounded-full font-semibold hover-scale">
-              Открытые вакансии
+            <Button 
+              asChild
+              className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-12 py-6 text-lg rounded-full font-semibold hover-scale"
+            >
+              <a href="https://hh.ru" target="_blank" rel="noopener noreferrer">
+                Открытые вакансии
+              </a>
             </Button>
           </Card>
         </div>
