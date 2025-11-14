@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": "",
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "Test POST with valid data",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Test User",
+        "phone": "+7 900 123-45-67",
+        "productName": "Дизельное топливо",
+        "specification": "ГОСТ 305-2013",
+        "quantity": "1000 тонн",
+        "destination": "Москва"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": "boolean"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test POST with missing required field",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Test User",
+        "phone": "+7 900 123-45-67"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

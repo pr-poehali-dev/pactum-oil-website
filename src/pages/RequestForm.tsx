@@ -24,21 +24,46 @@ const RequestForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: 'Запрос отправлен!',
-      description: 'Мы свяжемся с вами в ближайшее время.',
-    });
-    setFormData({
-      name: '',
-      phone: '',
-      productName: '',
-      specification: '',
-      quantity: '',
-      destination: '',
-      notes: ''
-    });
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/9b27c5d1-3e7d-404d-9d66-b32c7802c4ad', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Запрос отправлен!',
+          description: 'Мы свяжемся с вами в ближайшее время.',
+        });
+        setFormData({
+          name: '',
+          phone: '',
+          productName: '',
+          specification: '',
+          quantity: '',
+          destination: '',
+          notes: ''
+        });
+      } else {
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось отправить запрос. Попробуйте позже.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Ошибка',
+        description: 'Не удалось отправить запрос. Проверьте подключение к интернету.',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -154,14 +179,13 @@ const RequestForm = () => {
 
             <div>
               <label htmlFor="notes" className="block text-white font-semibold mb-2">
-                Примечания *
+                Примечания
               </label>
               <Textarea
                 id="notes"
                 name="notes"
                 value={formData.notes}
                 onChange={handleInputChange}
-                required
                 rows={4}
                 className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00] resize-none"
                 placeholder="Дополнительная информация, особые требования..."
