@@ -137,13 +137,11 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('home')}>
-              <div className="w-12 h-12 bg-[#FF8C00] rounded-full flex items-center justify-center">
-                <Icon name="Flame" size={28} className="text-[#0A0A0A]" />
-              </div>
-              <div>
-                <h1 className="text-white text-xl font-bold tracking-wider">PACTUM</h1>
-                <p className="text-[#FF8C00] text-xs font-semibold">OIL COMPANY</p>
-              </div>
+              <img 
+                src="https://cdn.poehali.dev/files/031b3d50-43ca-473b-9369-afec09d6e5ca.png" 
+                alt="Pactum Oil Company Logo" 
+                className="h-12 w-auto"
+              />
             </div>
             
             <div className="hidden lg:flex items-center gap-8">
