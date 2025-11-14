@@ -1,0 +1,147 @@
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
+import Icon from '@/components/ui/icon';
+
+const Offers = () => {
+  const navigate = useNavigate();
+
+  const offers = [
+    {
+      id: 1,
+      title: 'Нефть сырая',
+      description: 'Высококачественная сырая нефть для переработки',
+      specifications: [
+        'Плотность: 820-850 кг/м³',
+        'Содержание серы: до 0.5%',
+        'Выход светлых фракций: до 60%',
+        'Соответствие ГОСТ Р 51858-2002'
+      ],
+      available: true,
+      price: 'По запросу'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
+      <nav className="bg-[#0A0A0A] border-b-4 border-[#FF8C00] sticky top-0 z-50 px-6 py-4">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
+            <img 
+              src="https://cdn.poehali.dev/files/192ce21d-f20e-4289-bb57-c70974d9603a.png" 
+              alt="Pactum Oil Company Logo"
+              className="h-12 w-12 object-contain"
+            />
+            <span className="text-white font-bold text-xl">Pactum Oil</span>
+          </div>
+          <Button
+            onClick={() => navigate('/')}
+            variant="ghost"
+            className="text-white hover:text-[#FF8C00]"
+          >
+            <Icon name="Home" size={20} className="mr-2" />
+            На главную
+          </Button>
+        </div>
+      </nav>
+
+      <div className="container mx-auto max-w-6xl py-20 px-6">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold text-[#0A0A0A] mb-6">
+            Актуальные предложения
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Качественная нефтяная продукция для ваших потребностей
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {offers.map((offer) => (
+            <Card 
+              key={offer.id}
+              className="bg-white border-2 border-gray-200 hover:border-[#FF8C00] transition-all duration-300 overflow-hidden hover:shadow-xl"
+            >
+              <div className="bg-gradient-to-r from-[#FF8C00] to-[#FFA500] p-6">
+                <h3 className="text-2xl font-bold text-white mb-2">{offer.title}</h3>
+                <p className="text-white/90">{offer.description}</p>
+              </div>
+              
+              <div className="p-6">
+                <div className="mb-6">
+                  <h4 className="font-semibold text-[#0A0A0A] mb-3 flex items-center gap-2">
+                    <Icon name="FileText" size={18} className="text-[#FF8C00]" />
+                    Характеристики:
+                  </h4>
+                  <ul className="space-y-2">
+                    {offer.specifications.map((spec, index) => (
+                      <li key={index} className="flex items-start gap-2 text-gray-700 text-sm">
+                        <Icon name="CheckCircle" size={16} className="text-[#FF8C00] flex-shrink-0 mt-0.5" />
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="border-t border-gray-200 pt-4 mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-600 font-medium">Статус:</span>
+                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      offer.available 
+                        ? 'bg-green-100 text-green-700' 
+                        : 'bg-red-100 text-red-700'
+                    }`}>
+                      {offer.available ? 'В наличии' : 'Под заказ'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600 font-medium">Цена:</span>
+                    <span className="text-[#FF8C00] font-bold text-lg">{offer.price}</span>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={() => navigate('/request')}
+                  className="w-full bg-[#FF8C00] text-white hover:bg-[#FFA500] py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
+                >
+                  <Icon name="Send" size={18} className="mr-2" />
+                  Запросить предложение
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Не нашли нужную продукцию?
+            </h3>
+            <p className="text-gray-300 mb-6">
+              Мы работаем с широким спектром нефтепродуктов. 
+              Свяжитесь с нами для индивидуального предложения.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={() => navigate('/request')}
+                className="bg-[#FF8C00] text-white hover:bg-[#FFA500] px-8 py-6 text-lg rounded-full font-semibold"
+              >
+                <Icon name="FileText" size={20} className="mr-2" />
+                Отправить запрос
+              </Button>
+              <Button
+                onClick={() => navigate('/#contacts')}
+                variant="outline"
+                className="border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white px-8 py-6 text-lg rounded-full font-semibold"
+              >
+                <Icon name="Phone" size={20} className="mr-2" />
+                Связаться с нами
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Offers;
