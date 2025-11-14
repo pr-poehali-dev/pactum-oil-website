@@ -64,7 +64,7 @@ const Index = () => {
 
   const activities = [
     {
-      icon: 'Drill',
+      icon: 'Flame',
       title: 'Добыча',
       description: 'Современные технологии разведки и добычи нефти на месторождениях',
     },
@@ -74,12 +74,12 @@ const Index = () => {
       description: 'Высокотехнологичное производство нефтепродуктов',
     },
     {
-      icon: 'Truck',
+      icon: 'TrainFront',
       title: 'Транспортировка',
       description: 'Надежная логистическая сеть для доставки продукции',
     },
     {
-      icon: 'Beaker',
+      icon: 'Landmark',
       title: 'Переработка',
       description: 'Глубокая переработка с применением инновационных методов',
     },
