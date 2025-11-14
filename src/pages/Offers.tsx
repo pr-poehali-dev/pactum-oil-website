@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const Offers = () => {
   const navigate = useNavigate();
+  const [filterType, setFilterType] = useState('all');
+  const [filterVolume, setFilterVolume] = useState('all');
 
   const offers = [
     {
@@ -13,10 +17,10 @@ const Offers = () => {
       description: 'Высококачественная сырая нефть для переработки',
       specifications: [
         'ГОСТ Р 51858-2002',
-        'Минимальный объем: от 10 000 МТ',
-        'Плотность: 820-850 кг/м³',
-        'Содержание серы: до 0.5%'
+        'Минимальный объем: от 10 000 МТ'
       ],
+      category: 'crude',
+      minVolume: 10000,
       available: true,
       price: 'По запросу'
     },
@@ -27,9 +31,10 @@ const Offers = () => {
       specifications: [
         'Евро К5, ГОСТ Р 32511-2013',
         'Минимальный объем: от 10 000 МТ',
-        'Цетановое число: не менее 51',
-        'Содержание серы: не более 10 мг/кг'
+        'Цетановое число: не менее 51'
       ],
+      category: 'fuel',
+      minVolume: 10000,
       available: true,
       price: 'По запросу'
     },
@@ -43,6 +48,8 @@ const Offers = () => {
         'Октановое число: 92-95',
         'Экологический класс: К5'
       ],
+      category: 'fuel',
+      minVolume: 5000,
       available: true,
       price: 'По запросу'
     },
@@ -53,9 +60,10 @@ const Offers = () => {
       specifications: [
         'М-100, ГОСТ 10585-2013',
         'Минимальный объем: от 20 000 МТ',
-        'Вязкость условная: 10-16°ВУ',
-        'Содержание серы: до 2%'
+        'Вязкость условная: 10-16°ВУ'
       ],
+      category: 'fuel',
+      minVolume: 20000,
       available: true,
       price: 'По запросу'
     },
@@ -69,6 +77,8 @@ const Offers = () => {
         'Температура вспышки: не ниже 28°С',
         'Кислотность: не более 0.7 мг КОН/100мл'
       ],
+      category: 'fuel',
+      minVolume: 5000,
       available: true,
       price: 'По запросу'
     },
@@ -82,10 +92,21 @@ const Offers = () => {
         'Пенетрация: 60-90 (0.1мм)',
         'Температура размягчения: 47-54°С'
       ],
+      category: 'other',
+      minVolume: 10000,
       available: true,
       price: 'По запросу'
     }
   ];
+
+  const filteredOffers = offers.filter(offer => {
+    const typeMatch = filterType === 'all' || offer.category === filterType;
+    const volumeMatch = filterVolume === 'all' || 
+      (filterVolume === '5000' && offer.minVolume <= 5000) ||
+      (filterVolume === '10000' && offer.minVolume <= 10000) ||
+      (filterVolume === '20000' && offer.minVolume <= 20000);
+    return typeMatch && volumeMatch;
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
@@ -111,7 +132,7 @@ const Offers = () => {
       </nav>
 
       <div className="container mx-auto max-w-6xl py-20 px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-[#0A0A0A] mb-6">
             Актуальные предложения
           </h1>
@@ -120,8 +141,37 @@ const Offers = () => {
           </p>
         </div>
 
+        <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="w-full sm:w-64">
+            <Select value={filterType} onValueChange={setFilterType}>
+              <SelectTrigger className="border-2 border-[#FF8C00]">
+                <SelectValue placeholder="Тип продукции" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Все типы</SelectItem>
+                <SelectItem value="crude">Нефть сырая</SelectItem>
+                <SelectItem value="fuel">Топливо</SelectItem>
+                <SelectItem value="other">Прочее</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full sm:w-64">
+            <Select value={filterVolume} onValueChange={setFilterVolume}>
+              <SelectTrigger className="border-2 border-[#FF8C00]">
+                <SelectValue placeholder="Минимальный объем" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Любой объем</SelectItem>
+                <SelectItem value="5000">До 5 000 МТ</SelectItem>
+                <SelectItem value="10000">До 10 000 МТ</SelectItem>
+                <SelectItem value="20000">До 20 000 МТ</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {offers.map((offer) => (
+          {filteredOffers.map((offer) => (
             <Card 
               key={offer.id}
               className="bg-white border-2 border-gray-200 hover:border-[#FF8C00] transition-all duration-300 overflow-hidden hover:shadow-xl"
@@ -164,13 +214,22 @@ const Offers = () => {
                   </div>
                 </div>
 
-                <Button
-                  onClick={() => navigate('/request')}
-                  className="w-full bg-[#FF8C00] text-white hover:bg-[#FFA500] py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
-                >
-                  <Icon name="Send" size={18} className="mr-2" />
-                  Запросить предложение
-                </Button>
+                <div className="flex flex-col gap-3">
+                  <Button
+                    onClick={() => navigate('/request')}
+                    className="w-full bg-[#FF8C00] text-white hover:bg-[#FFA500] py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
+                  >
+                    <Icon name="Send" size={18} className="mr-2" />
+                    Запросить предложение
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white py-6 text-base rounded-full font-semibold transition-all hover:scale-105"
+                  >
+                    <a href="/request">Перейти к запросу</a>
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
@@ -194,12 +253,14 @@ const Offers = () => {
                 Отправить запрос
               </Button>
               <Button
-                onClick={() => navigate('/#contacts')}
+                asChild
                 variant="outline"
                 className="border-2 border-[#FF8C00] text-[#FF8C00] hover:bg-[#FF8C00] hover:text-white px-8 py-6 text-lg rounded-full font-semibold"
               >
-                <Icon name="Phone" size={20} className="mr-2" />
-                Связаться с нами
+                <a href="/#contacts">
+                  <Icon name="Phone" size={20} className="mr-2" />
+                  Связаться с нами
+                </a>
               </Button>
             </div>
           </Card>

@@ -220,14 +220,22 @@ const Index = () => {
             Полный цикл работы с минеральным топливом: от добычи до глубокой переработки
           </p>
           <p className="text-lg md:text-xl text-[#0A0A0A]/80 mb-10 max-w-3xl mx-auto">
-            Широкий спектр нефтяной продукции
+            Широкий ассортимент нефтепродуктов высокого качества
           </p>
-          <Button
-            onClick={() => navigate('/request')}
-            className="bg-[#0A0A0A] text-white hover:bg-[#1A1A1A] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
-          >
-            Запросить
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              onClick={() => navigate('/request')}
+              className="bg-[#0A0A0A] text-white hover:bg-[#1A1A1A] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
+            >
+              Запросить
+            </Button>
+            <Button 
+              onClick={() => navigate('/offers')}
+              className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-12 py-6 text-lg rounded-full font-semibold transition-all hover-scale"
+            >
+              Актуальные предложения
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -309,22 +317,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="products" className="py-24 bg-[#0A0A0A] px-6">
-        <div className="container mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold text-[#FF8C00] mb-6 text-center scroll-animate opacity-0">Продукты</h2>
-          <p className="text-center text-white text-xl mb-16 max-w-3xl mx-auto scroll-animate opacity-0">
-            Широкий ассортимент нефтепродуктов высокого качества
-          </p>
-          <div className="flex justify-center">
-            <Button 
-              onClick={() => navigate('/offers')}
-              className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] hover:scale-105 transition-all duration-300 rounded-full font-bold text-lg px-12 py-8 scroll-animate opacity-0"
-            >
-              Ознакомиться с актуальными предложениями
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
 
 
@@ -335,7 +328,7 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="scroll-animate opacity-0">
               <h3 className="text-3xl font-bold text-white mb-8">Свяжитесь с нами</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                 <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
                   <Icon name="MapPin" size={32} className="text-[#FF8C00] mb-3" />
                   <h4 className="text-lg font-bold text-white mb-2">Адрес</h4>
@@ -357,6 +350,24 @@ const Index = () => {
                   <p className="text-gray-300 text-sm">Пн-Пт: 9:00 - 18:00</p>
                 </Card>
               </div>
+              
+              <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-6">
+                <h4 className="text-2xl font-bold text-white mb-4 text-center">Запросить звонок</h4>
+                <p className="text-gray-300 text-center mb-6">
+                  Оставьте ваш номер телефона, и наш менеджер свяжется с вами в ближайшее время
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    className="bg-[#0A0A0A] border-[#FF8C00] text-white placeholder:text-gray-500 focus:ring-[#FF8C00] flex-1"
+                  />
+                  <Button className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] px-8 py-6 rounded-full font-semibold whitespace-nowrap">
+                    <Icon name="PhoneCall" size={18} className="mr-2" />
+                    Заказать звонок
+                  </Button>
+                </div>
+              </Card>
             </div>
 
             <Card className="bg-[#1A1A1A] border-2 border-[#FF8C00] p-8 scroll-animate opacity-0">
