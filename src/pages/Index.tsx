@@ -316,7 +316,10 @@ const Index = () => {
             Широкий ассортимент нефтепродуктов высокого качества
           </p>
           <div className="flex justify-center">
-            <Button className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] hover:scale-105 transition-all duration-300 rounded-full font-bold text-lg px-12 py-8 scroll-animate opacity-0">
+            <Button 
+              onClick={() => navigate('/offers')}
+              className="bg-[#FF8C00] text-[#0A0A0A] hover:bg-[#FFA500] hover:scale-105 transition-all duration-300 rounded-full font-bold text-lg px-12 py-8 scroll-animate opacity-0"
+            >
               Ознакомиться с актуальными предложениями
             </Button>
           </div>
